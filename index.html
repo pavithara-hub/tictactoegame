@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="game.css">
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Press+Start+2P&family=Rock+Salt&family=Sigmar+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <title>Tic-Tac-toe</title>
+</head>
+<body>
+    
+        
+  <div class="one" id="onediv">
+    
+      <p id="p1">TIC-TAC-TOE</p>
+
+      <div class="two" id="logindiv"> 
+      <form class="form1">
+
+          <label style="color:#e08514;padding-left:160px;font-size:30px;font-family: 'Rock Salt', cursive;"><b>Username</b></label>
+          <input type="text" name="username" id="loginu" ><br><br>
+
+          <label style="color:#e08514;padding-left:160px;font-size:30px;font-family: 'Rock Salt', cursive;"><b>Password</b></label>
+          <input type="password" name="psw" id="loginp"><br><br><br><br>
+
+          <input type="submit" value="Login" onclick="logingame()"><br><br><br>
+          <label style="margin-left:150px;color:#e08514 ;font-size:17px;font-family: 'Rock Salt', cursive;">If not registered↓↓</label> <br>
+
+          <input type="submit" value="Register" onclick="registeruser()">
+      </form>
+    </div>
+    
+<div class="three" id="registerdiv"> 
+    <form class="form2" onsubmit="registered()">
+
+        <label style="color:#e08514 ;padding-left:160px;font-size:30px;font-family: 'Rock Salt', cursive;"><b>Username</b></label>
+        <input type="text"  id="regu" name="username" required><br><br>
+
+        <label style="color:#e08514 ;padding-left:160px;font-size:30px;font-family: 'Rock Salt', cursive;"><b>Password</b></label>
+        <input type="password"  id="regp" name="psw" required><br><br><br><br>
+
+    
+        <input type="submit" value="Register">
+    </form>
+</div>
+
+<div class="four" id="playerdiv">
+    <form class="form3" onsubmit="playgame()">
+
+        <label style="color:#e08514 ;padding-left:160px;font-size:30px;font-family: 'Rock Salt', cursive;"><b>Player 1</b></label>
+        <input type="text" name="play1" id="play1"required><br><br>
+
+        <label style="color:#e08514 ;padding-left:160px;font-size:30px;font-family: 'Rock Salt', cursive;"><b>Player 2</b></label>
+        <input type="text" name="play2" id="play2" required><br><br><br><br>
+
+        <input type="submit" value="Play Now">
+
+
+    </form>
+</div>
+<div class="five" id="gamediv">
+<center>    
+    <p id="p2"></p>
+
+    </p>    
+    <table class="xo">
+        <tr>
+            <td><input type="button" id="1" onclick="check(1)" value=""></td>
+            <td><input type="button" id="2" onclick="check(2)" value=""></td>
+            <td><input type="button" id="3" onclick="check(3)" value=""></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="4" onclick="check(4)" value=""></td>
+            <td><input type="button" id="5" onclick="check(5)" value=""></td>
+            <td><input type="button" id="6" onclick="check(6)" value=""></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="7" onclick="check(7)" value=""></td>
+            <td><input type="button" id="8" onclick="check(8)" value=""></td>
+            <td><input type="button" id="9" onclick="check(9)" value=""></td>
+        </tr>
+    </table>
+    <p id=p3></p>
+    <button id="bt1" onclick="playagain()">Play Again!!</button>
+   </center>
+    
+</div>
+
+
+</div>  
+  <script>
+      let home=document.getElementById("onediv");
+    let login=document.getElementById("logindiv");
+    let register=document.getElementById("registerdiv");
+    let play=document.getElementById("playerdiv");
+    let letsplay=document.getElementById("gamediv");
+    let player1=document.getElementById("play1");
+    let player2=document.getElementById("play2");
+    
+    
+    register.remove();
+    play.remove();
+    letsplay.remove();
+
+    function loginpage(){
+        
+                register.remove();
+                play.remove();
+                letsplay.remove();
+                home.appendChild(login);
+
+    }
+    
+    function registeruser(){
+        login.remove();
+        play.remove();
+        letsplay.remove();
+        home.appendChild(register);
+    }
+
+    function playagain(){
+                login.remove();
+                register.remove();
+                letsplay.remove();
+                home.appendChild(play);
+    }
+
+    var userdata=[{uname:"p",pass:"p"}];
+    function logingame()
+    {
+        var uname=document.getElementById("loginu").value;
+        var pass=document.getElementById("loginp").value;
+        var obj={"uname":uname,"pass":pass};
+
+        var flag=false;
+        for(let i=0;i<userdata.length;i++)
+        {
+            if(userdata[i].uname==uname && userdata[i].pass==pass)
+                flag=true;
+            }
+            if(flag)
+            {
+                login.remove();
+                register.remove();
+                letsplay.remove();
+                home.appendChild(play);
+                
+            }
+            else
+            {
+            alert("Incorrect ");
+            }
+
+    }
+    function registered()
+    {
+        var uname=document.getElementById("regu").value;
+        var pass=document.getElementById("regp").value;
+        var obj1={"uname":uname,"pass":pass};
+        userdata.push(obj1);
+       loginpage();
+       
+    }
+    function playgame(){
+        login.remove();
+        register.remove();
+        play.remove();
+        home.appendChild(letsplay);
+        document.getElementById("p2").innerHTML=player1.value + " " + "Your Turn" + "(X)" ;
+       resetdisable();
+        
+
+    }
+    function resetdisable(){
+        var b1 = document.getElementById("1");
+    var b2 = document.getElementById("2");
+    var b3 = document.getElementById("3");
+    var b4 = document.getElementById("4");
+    var b5 = document.getElementById("5");
+    var b6 = document.getElementById("6");
+    var b7 = document.getElementById("7");
+    var b8 = document.getElementById("8");
+    var b9 = document.getElementById("9");
+    
+    b1.value="";
+    b2.value="";
+    b3.value="";
+    b4.value="";
+    b5.value="";
+    b6.value="";
+    b7.value="";
+    b8.value="";
+    b9.value="";
+    b1.disabled=false;
+    b2.disabled=false;
+    b3.disabled=false;
+    b4.disabled=false;
+    b5.disabled=false;
+    b6.disabled=false;
+    b7.disabled=false;
+    b8.disabled=false;
+    b9.disabled=false;
+    }
+    var xoro="O";
+    function btndisable(){
+    var b1 = document.getElementById("1");
+    var b2 = document.getElementById("2");
+    var b3 = document.getElementById("3");
+    var b4 = document.getElementById("4");
+    var b5 = document.getElementById("5");
+    var b6 = document.getElementById("6");
+    var b7 = document.getElementById("7");
+    var b8 = document.getElementById("8");
+    var b9 = document.getElementById("9");
+    
+    b1.disabled = true;
+    b2.disabled = true;
+    b3.disabled = true;
+    b4.disabled = true;
+    b5.disabled = true;
+    b6.disabled = true;
+    b7.disabled = true;
+    b8.disabled = true;
+    b9.disabled = true;
+
+    document.getElementById("p2").innerHTML="";
+    }
+
+    function winner(win){
+       btndisable();
+       if(win=="X"){
+       document.getElementById("p3").innerHTML= player1.value + "  " + "wins the game";
+       }
+       else if(win=="O"){
+           document.getElementById("p3").innerHTML= player2.value + "  " + "wins the game";
+       }
+
+   }
+    function condition(){
+        var b1 = document.getElementById("1").value;
+        var b2 = document.getElementById("2").value;
+        var b3 = document.getElementById("3").value;
+        var b4 = document.getElementById("4").value;
+        var b5 = document.getElementById("5").value;
+        var b6 = document.getElementById("6").value;
+        var b7 = document.getElementById("7").value;
+        var b8 = document.getElementById("8").value;
+        var b9 = document.getElementById("9").value;
+
+        if (((b1=="X") || (b1=="O")) && ((b1 == b2) && (b2 == b3))) 
+        {
+            winner(b1);
+    }
+    else if(((b1=="X") || (b1=="O")) && ((b1==b4) && (b4==b7)))
+    {
+        winner(b2);
+    }
+    else if(((b9=="X") || (b9=="O")) && ((b9==b6) && (b6==b3)))
+    {
+        winner(b9);
+    }
+    else if(((b9=="X") || (b9=="O")) && ((b9==b8) && (b8==b7)))
+    {
+        winner(b9);
+    }
+    else if(((b2=="X") || (b2=="O")) && ((b2==b5) && (b5==b8)))
+    {
+        winner(b2);
+    }
+    else if(((b4=="X") || (b4=="O")) && ((b4==b5) && (b5==b6)))
+    {
+        winner(b4);
+    }
+    else if(((b1=="X") || (b1=="O")) && ((b1==b5) && (b5=b9)))
+    {
+        winner(b1);
+    }
+    else if(((b3=="X") || (b3=="O")) && ((b3==b5) && (b5==b7)))
+    {
+        winner(b3);
+    }
+   }
+    
+    function prob(a,xoro)
+    {
+        if(a==1){
+            var button=document.getElementById("1");
+            button.value=xoro;
+            button.disable=true;
+        }
+        else if(a==2){
+            var button=document.getElementById("2");
+            button.value=xoro;
+            button.disable=true;
+        }
+        else if(a==3){
+            var button=document.getElementById("3");
+            button.value=xoro;
+            button.disable=true;
+        }
+        else if(a==4){
+            var button=document.getElementById("4");
+            button.value=xoro;
+            button.disable=true;
+        }
+        else if(a==5){
+            var button=document.getElementById("5");
+            button.value=xoro;
+            button.disable=true;
+        }
+        else if(a==6){
+            var button=document.getElementById("6");
+            button.value=xoro;
+            button.disable=true;
+        }
+        else if(a==7){
+            var button=document.getElementById("7");
+            button.value=xoro;
+            button.disable=true;
+        }
+        else if(a==8){
+            var button=document.getElementById("8");
+            button.value=xoro;
+            button.disable=true;
+        }
+        else if(a==9){
+            var button=document.getElementById("9");
+            button.value=xoro;
+            button.disable=true;
+        }
+        condition();
+    }
+    
+    function check(button)
+    {
+        if(xoro=="X")
+        {
+            document.getElementById("p2").innerHTML=player1.value + " " + "Your Turn" + "(" + xoro + ")";
+            xoro="O";
+            prob(button,xoro);
+
+        }
+        else if(xoro=="O")
+        {
+            document.getElementById("p2").innerHTML=player2.value + " " +  "Your Turn" + "("+  xoro + ")";
+            xoro="X";
+            prob(button,xoro);
+        }
+
+    }
+  </script>
+</body>
+</html>
