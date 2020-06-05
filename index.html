@@ -201,6 +201,8 @@
     b7.disabled=false;
     b8.disabled=false;
     b9.disabled=false;
+
+    document.getElementById("p3").innerHTML="";
     }
     var xoro="O";
     function btndisable(){
@@ -225,6 +227,7 @@
     b9.disabled = true;
 
     document.getElementById("p2").innerHTML="";
+    
     }
 
     function winner(win){
@@ -272,13 +275,17 @@
     {
         winner(b4);
     }
-    else if(((b1=="X") || (b1=="O")) && ((b1==b5) && (b5=b9)))
+    else if(((b1=="X") || (b1=="O")) && ((b1==b5) && (b5==b9)))
     {
         winner(b1);
     }
     else if(((b3=="X") || (b3=="O")) && ((b3==b5) && (b5==b7)))
     {
         winner(b3);
+    }
+    else if((b1!=="") && (b2!="") && (b3!="") && (b4!="")  && (b5!="") && (b6!="") && (b7!="") && (b8!="")  && (b9!=""))
+    {
+        document.getElementById("p3").innerHTML="Game Draw";
     }
    }
     
@@ -347,6 +354,7 @@
             xoro="X";
             prob(button,xoro);
         }
+        
 
     }
   </script>
